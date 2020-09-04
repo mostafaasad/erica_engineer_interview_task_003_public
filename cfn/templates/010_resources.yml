@@ -33,6 +33,7 @@ Resources:
       AvailabilityZone: "ap-southeast-2a"
       CidrBlock: 192.168.0.0/26
       VpcId: !Ref Vpc
+      MapPublicIpOnLaunch: "true"
 
   PublicSubnetRouteTable:
     Type: AWS::EC2::RouteTable
