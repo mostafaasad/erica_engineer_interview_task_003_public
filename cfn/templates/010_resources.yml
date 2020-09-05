@@ -30,7 +30,8 @@ Resources:
   SubnetPublic:
     Type: "AWS::EC2::Subnet"
     Properties:
-      AvailabilityZone: "ap-southeast-2a"
+      #AvailabilityZone: "ap-southeast-2a"
+      AvailabilityZone: "ap-south-1a"
       CidrBlock: 192.168.0.0/26
       VpcId: !Ref Vpc
       MapPublicIpOnLaunch: "true"
@@ -77,6 +78,7 @@ Resources:
           - sts:AssumeRole
       ManagedPolicyArns:
         - "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+        - "arn:aws:iam::652093067267:policy/EC2DescribeVolumes"
 
   InstanceProfile:
     Type: AWS::IAM::InstanceProfile
@@ -102,7 +104,8 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: "t3.micro"
-      ImageId: ami-00671cd019674e67c
+      #ImageId: ami-00671cd019674e67c   #AMI for ap-southeast-2
+      ImageId: ami-09a7bbd08886aafdf  #AMI for ap-south-1
       IamInstanceProfile: !Ref InstanceProfile
       BlockDeviceMappings: 
         - DeviceName: "/dev/xvdm"
@@ -115,7 +118,7 @@ Resources:
       SubnetId: !Ref SubnetPublic
       UserData:
         Fn::Base64: !Sub |
-          #!/bin/bash
+          #!/bin/bash 
           export HOST_IP=$(curl -s http://169.254.169.254/latest/meta-data/local-ipv4)
           export MACHINE_NAME=$(tr '.' '-' <<<$HOST_IP)
           export AWS_INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
@@ -123,12 +126,16 @@ Resources:
           export AWS_REGION="`echo \"$AWS_AVAIL_ZONE\" | sed 's/[a-z]$//'`"
           echo "export AWS_DEFAULT_REGION=${!AWS_REGION}" >> /etc/bashrc
 
-          yum update
-          yum install -y nginx
+          yum update -y
+          amazon-linux-extras install -y  nginx1
+        
           
           systemctl enable nginx
           systemctl start nginx
           
+           # Install the files and packages from the metadata
+          /opt/aws/bin/cfn-init  --stack ${AWS::StackName} --resource=Instance --region ${AWS::Region}
+
           DATA_STATE="unknown"
           until [ "${!DATA_STATE}" == "attached" ]; do
             DATA_STATE=$(aws ec2 describe-volumes \
@@ -152,10 +159,16 @@ Resources:
           # Mount all volumes
           mount -a
 
+         
+          
+          # Signal the status from cfn-init
           /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackName} --resource=Instance --region ${AWS::Region}
+
+
     CreationPolicy:
       ResourceSignal:
         Timeout: PT5M
+        
 
 Outputs:
   PublicWebsiteAddress:
