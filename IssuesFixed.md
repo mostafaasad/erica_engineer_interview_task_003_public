@@ -1,9 +1,9 @@
 ## The following issues have been fixed for successful deployments
-1. Uncommented line
-1. Added PublicIpOnLaunch in the subnet
+1. Uncommented line  (ERICA engineer interview task)
+1. Added MapPublicIpOnLaunch property true in the subnet
 1. Added EC2DescribeVolumes for EC2 InstanceRole
-1. nginx install for the AMI
-1. Install the files and packages from the metadata (cnn-init)
+1. nginx installation for the AMI
+1. Added the script to install the files and packages for the metadata (cnn-init)
 
 
 ## Deploying in Sydney and Mumbai regions
