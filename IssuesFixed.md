@@ -3,7 +3,8 @@
 1. Added MapPublicIpOnLaunch property true in the subnet
 1. Added EC2DescribeVolumes for EC2 InstanceRole
 1. nginx installation for the AMI
-1. Added the script to install the files and packages for the metadata (cnn-init)
+1. Added the script to install the files and packages for the metadata (cfn-init)
+1. Used AWSCLI on Mac for configuring the environment
 
 
 ## Deploying in Sydney and Mumbai regions
