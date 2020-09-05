@@ -12,6 +12,6 @@ Created two different stacks for two regions. For the AMIs and availability zone
 
 Here below the URLs for the two deployments
 
-Sydney Region: http://ec2-3-25-189-212.ap-southeast-2.compute.amazonaws.com/
+Sydney Region: http://ec2-13-210-71-180.ap-southeast-2.compute.amazonaws.com/
 
-Mumbai Region: http://ec2-13-233-198-200.ap-south-1.compute.amazonaws.com/
+Mumbai Region: http://ec2-13-235-243-106.ap-south-1.compute.amazonaws.com/
