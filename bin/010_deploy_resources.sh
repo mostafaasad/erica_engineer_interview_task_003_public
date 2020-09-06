@@ -21,7 +21,7 @@ then
 fi
 
 stage=$1
-stackname=unsw-interview-task-003-TEST
+stackname=unsw-interview-task-003-MUM
 
 stackup="${CONTAINER_ENGINE} run --rm \
   -v `pwd`:/cwd:Z \
