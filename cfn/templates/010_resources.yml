@@ -30,8 +30,8 @@ Resources:
   SubnetPublic:
     Type: "AWS::EC2::Subnet"
     Properties:
-      #AvailabilityZone: "ap-southeast-2a"
-      AvailabilityZone: "ap-south-1a"
+      AvailabilityZone: "ap-southeast-2a"
+      #AvailabilityZone: "ap-south-1a"
       CidrBlock: 192.168.0.0/26
       VpcId: !Ref Vpc
       MapPublicIpOnLaunch: "true"
@@ -104,8 +104,8 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: "t3.micro"
-      #ImageId: ami-00671cd019674e67c   #AMI for ap-southeast-2
-      ImageId: ami-09a7bbd08886aafdf  #AMI for ap-south-1
+      ImageId: ami-00671cd019674e67c   #AMI for ap-southeast-2
+      #ImageId: ami-09a7bbd08886aafdf  #AMI for ap-south-1
       IamInstanceProfile: !Ref InstanceProfile
       BlockDeviceMappings: 
         - DeviceName: "/dev/xvdm"
