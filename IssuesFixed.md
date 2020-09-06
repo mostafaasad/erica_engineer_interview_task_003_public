@@ -1,10 +1,10 @@
 ## The following issues have been fixed for successful deployments
-1. Uncommented line  (ERICA engineer interview task)
+1. Uncommented line  (ERICA engineer interview task) in 010_resources.yml file
 1. Added MapPublicIpOnLaunch property true in the subnet
-1. Added EC2DescribeVolumes for EC2 InstanceRole
+1. Added the poloicy for EC2DescribeVolumes for EC2 InstanceRole
 1. Fixed nginx installation for the AMI
 1. Added the script to install the files and packages for the metadata (cfn-init)
-1. Configuring the environment using AWSCLI in MacOS
+1. Configured the environment using AWSCLI in MacOS
 
 
 ## Deploying in Sydney and Mumbai regions
